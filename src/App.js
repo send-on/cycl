@@ -10,6 +10,7 @@ import {
 import './App.css';
 import Hit from './Hits.js'
 import MapContainer from './MapContainer'
+import { geolocated } from "react-geolocated";
 import { Map, GoogleApiWrapper } from 'google-maps-react';
 import { APPID, SEARCH_API_KEY, indexName } from './config';
 
@@ -21,6 +22,7 @@ const mapStyles = {
 const searchClient = algoliasearch(APPID, SEARCH_API_KEY);
 
 class App extends Component {
+  
   render() {
     return (
       <div>
@@ -66,4 +68,11 @@ class App extends Component {
   }
 }
 
-export default App;
+export default geolocated({
+  positionOptions: {
+    enableHighAccuracy: false,
+  },
+  userDecisionTimeout: 5000,
+})(App);
+
+// export default App;
